@@ -21,34 +21,6 @@
         <ul>
             <ul>
 
-                <li class="relative px-6 py-3">
-                    <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 hover:text-blue-300 dark:hover:text-blue-200"
-                        {{-- href="{{ route('paymentMethod') }}" --}}
-                        href="#"
-                        >
-                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
-                            <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                            <path fill="#ffffff"
-                                d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z" />
-                        </svg>
-                        <span class="ml-4">Metodos de Pago</span>
-                    </a>
-                </li>
-                <li class="relative px-6 py-3">
-                    <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 hover:text-blue-300 dark:hover:text-blue-200"
-                        {{-- href="{{ route('subscripcion') }}" --}}
-                        href="#"
-                        >
-                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="7" width="18" height="14" rx="2" ry="2"></rect>
-                            <path d="M7 2h10a1 1 0 011 1v2a5 5 0 01-5 5H7a1 1 0 01-1-1V3a1 1 0 011-1z"></path>
-                        </svg>
-                        <span class="ml-4">Subscribciones</span>
-                    </a>
-                </li>
-
-
                 <!-- Agrega un separador aquí -->
                 <hr class="my-2 border-t border-gray-600">
                 <li class="relative px-6 py-3">
@@ -58,43 +30,6 @@
                         <span class="ml-4">Señas</span>
                     </span>
                 </li>
-
-
-                {{-- @if (auth()->user()->subscribedToPrice('price_1O8rF5Dh3Rgs6haXBpBaq63L', 'Fotovent'))
-                    <li class="relative px-6 py-3">
-                        <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 hover:text-blue-300 dark:hover:text-blue-200"
-                            href="{{ route('catalogo.index') }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" fill="white">
-                                <path
-                                    d="M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z" />
-                            </svg>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 17v1a1 1 0 001 1h4a1 1 0 001-1v-1"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 15s-2-4-6-4H9c-4 0-6 4-6 4"></path>
-                            <path d="M3 21h18a2 2 0 002-2v-1H1v1a2 2 0 002 2z"></path>
-                            </svg>
-                            <span class="ml-4">Crear Catalogo</span>
-                        </a>
-                    </li>
-                @else
-                    <li class="relative px-6 py-3">
-                        <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 hover:text-blue-300 dark:hover:text-blue-200"
-                            href="{{ route('catalogo.index') }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"
-                                fill="white">
-                                <path
-                                    d="M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z" />
-                            </svg>
-                            <path
-                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
-                            </path>
-                            <span class="ml-4">Crear Catalogo</span>
-                            <!-- Ícono de candado -->
-                            <i class="fas fa-lock ml-2"></i>
-                        </a>
-                    </li>
-                @endif --}}
 
                 <li class="relative px-6 py-3">
                     <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 hover:text-blue-300 dark:hover:text-blue-200"
