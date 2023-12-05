@@ -33,7 +33,7 @@
 
                 <li class="relative px-6 py-3">
                     <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 hover:text-blue-300 dark:hover:text-blue-200"
-                        href="#">
+                        href="users">
                         {{-- href="{{ route('traductor.index')}}"> --}}
                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" fill="white">
                             <path
@@ -45,7 +45,7 @@
                             d="M21 15s-2-4-6-4H9c-4 0-6 4-6 4"></path>
                         <path d="M3 21h18a2 2 0 002-2v-1H1v1a2 2 0 002 2z"></path>
                         </svg>
-                        <span class="ml-4">Karla</span>
+                        <span class="ml-4">Usuarios</span>
                     </a>
                 </li>
 
