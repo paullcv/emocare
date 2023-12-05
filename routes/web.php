@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CuestionarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,11 @@ Route::get('/inicio', function () {
         return view('inicio');
     })->name('inicio');
     
+
+//Cuestionario
+Route::get('/cuestionarios', [CuestionarioController::class, 'index'])->name('cuestionarios.index');
+Route::get('/cuestionarios/create', [CuestionarioController::class, 'create'])->name('cuestionarios.create');
+Route::get('/cuestionarios/{cuestionario}/edit', [CuestionarioController::class, 'edit'])->name('cuestionarios.edit');
+Route::post('/cuestionarios', [CuestionarioController::class, 'sendData'])->name('cuestionarios.save');
+Route::put('/cuestionarios/{cuestionario}', [CuestionarioController::class, 'update'])->name('cuestionarios.update');
+Route::delete('/cuestionarios/{cuestionario}', [CuestionarioController::class, 'destroy'])->name('cuestionarios.delete');
