@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PreguntaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CuestionarioController;
 
@@ -60,3 +61,12 @@ Route::get('/cuestionarios/{cuestionario}/edit', [CuestionarioController::class,
 Route::post('/cuestionarios', [CuestionarioController::class, 'sendData'])->name('cuestionarios.save');
 Route::put('/cuestionarios/{cuestionario}', [CuestionarioController::class, 'update'])->name('cuestionarios.update');
 Route::delete('/cuestionarios/{cuestionario}', [CuestionarioController::class, 'destroy'])->name('cuestionarios.delete');
+
+
+//Preguntas
+Route::get('/preguntas', [PreguntaController::class, 'index'])->name('preguntas.index');
+Route::get('/preguntas/create', [PreguntaController::class, 'create'])->name('preguntas.create');
+Route::post('/preguntas', [PreguntaController::class, 'sendData'])->name('preguntas.save');
+Route::get('/preguntas/{pregunta}/edit', [PreguntaController::class, 'edit'])->name('preguntas.edit');
+Route::put('/preguntas/{pregunta}', [PreguntaController::class, 'update'])->name('preguntas.update');
+Route::delete('/preguntas/{pregunta}', [PreguntaController::class, 'destroy'])->name('preguntas.delete');

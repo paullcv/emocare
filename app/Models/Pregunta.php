@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cuestionario extends Model
+class Pregunta extends Model
 {
     use HasFactory;
-    protected $fillable = ['titulo', 'descripcion'];
+
+    protected $fillable = ['pregunta','cuestionario_id'];
 
     //Relacion uno a muchos con cuestionario
-    public function preguntas(){
-        return $this->hasMany(Pregunta::class);
+    public function cuestionario(){
+        return $this->belongsTo(Cuestionario::class);
     }
 }
