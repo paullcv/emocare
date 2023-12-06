@@ -7,7 +7,7 @@
     </div>
 
     <div class="flex justify-between items-center mb-6">
-        <a href="{{route('cuestionarios.create')}}" class="bg-green-800 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+        <a href="{{ route('cuestionarios.create') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
             Crear Cuestionario
         </a>
     </div>
@@ -16,15 +16,36 @@
         <h2 class="text-2xl font-semibold mb-4">Listado de Cuestionarios</h2>
 
         @if ($cuestionarios->count() > 0)
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                @foreach ($cuestionarios as $cuestionario)
-                    <div class="bg-white p-4 rounded-md shadow-md">
-                        <h3 class="text-lg font-semibold mb-2">{{ $cuestionario->titulo }}</h3>
-                        <p class="text-gray-600">{{ $cuestionario->descripcion }}</p>
-                        <a href="{{ route('cuestionarios.edit', $cuestionario->id) }}"
-                            class="text-blue-500 mt-2 inline-block">Editar</a>
-                    </div>
-                @endforeach
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-300 divide-y divide-gray-300 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Título</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Descripción</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-300">
+                        @foreach ($cuestionarios as $cuestionario)
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $cuestionario->titulo }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $cuestionario->descripcion }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <a href="{{ route('cuestionarios.edit', $cuestionario->id) }}" class="text-blue-500 hover:underline">
+                                        <i class="fas fa-edit"></i> Editar
+                                    </a>
+                                    <form action="{{ route('cuestionarios.delete', $cuestionario->id) }}" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-500 ml-2 hover:underline">
+                                            <i class="fas fa-trash-alt"></i> Eliminar
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         @else
             <div class="bg-white p-4 rounded-md shadow-md">
