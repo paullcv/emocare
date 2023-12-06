@@ -17,9 +17,9 @@
             <div class="flex flex-col overflow-y-auto md:flex-row">
                 <div class="h-32 md:h-auto md:w-1/2">
                     <img aria-hidden="true" class="object-cover w-full h-full dark:hidden"
-                        src="{{ asset('img/foto2.jpg') }}" alt="Office" />
+                        src="{{ asset('img/registers3.jpg') }}" alt="Office" />
                     <img aria-hidden="true" class="hidden object-cover w-full h-full dark:block"
-                        src="{{ asset('img/create-account-office-dark.jpeg') }}" alt="Office" />
+                        src="{{ asset('img/registers3.jpg') }}" alt="Office" />
                 </div>
                 <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
                     <div class="w-full">
@@ -47,15 +47,6 @@
                                     class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                     placeholder="JaneDoe@gmail.com" name="email" id="email"
                                     :value="old('email')" />
-                            </label>
-
-                            {{-- TELEFONO --}}
-                            <label class="block mt-4 text-sm">
-                                <span class="text-gray-700 dark:text-gray-400">{{ __('Telephone') }}</span>
-                                <input
-                                    class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                                    placeholder="787687634" type="text" name="telephone" id="telephone"
-                                    name="telephone" :value="old('telephone')">
                             </label>
 
                             {{-- CONTRASEÑA --}}
