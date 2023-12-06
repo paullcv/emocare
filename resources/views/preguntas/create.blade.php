@@ -18,7 +18,7 @@
 
             <div class="mb-4">
                 <label for="pregunta" class="block text-sm font-medium text-gray-700">Pregunta:</label>
-                <input type="text" name="pregunta" id="pregunta" class="mt-1 p-2 w-full border rounded-md" required>
+                <textarea name="pregunta" id="pregunta" class="w-full border rounded-md" rows="5" required></textarea>
             </div>
 
             <div class="mb-4">
