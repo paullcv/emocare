@@ -1,7 +1,7 @@
-<div class="py-4 text-gray-500 dark:text-gray-400 flex flex-col h-screen bg-purple-900">
+<div class="py-4 text-gray-500 dark:text-gray-400 flex flex-col h-screen bg-blue-900">
     <div class="flex-grow">
         <a href="{{ route('dashboard') }}" class="flex justify-center items-center">
-            <img class="h-40 w-48 object-contain" src="{{ asset('img/signavox1.jpg') }}" alt="Logo">
+            <img class="h-40 w-48 object-contain" src="{{ asset('img/LogoNovaTech1.jpg') }}" alt="Logo">
         </a>
 
         <ul class="mt-6">
@@ -27,7 +27,7 @@
                     <span
                         class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 hover:text-blue-300 dark:hover:text-blue-200">
                         <!-- Texto del separador -->
-                        <span class="ml-4">Señas</span>
+                        <span class="ml-4">Educacion</span>
                     </span>
                 </li>
 
@@ -46,6 +46,24 @@
                         <path d="M3 21h18a2 2 0 002-2v-1H1v1a2 2 0 002 2z"></path>
                         </svg>
                         <span class="ml-4">Usuarios</span>
+                    </a>
+                </li>
+
+                <li class="relative px-6 py-3">
+                    <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 hover:text-blue-300 dark:hover:text-blue-200"
+                        {{-- href="#"> --}}
+                        href="{{ route('cuestionarios.index')}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" fill="white">
+                            <path
+                                d="M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z" />
+                        </svg>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 17v1a1 1 0 001 1h4a1 1 0 001-1v-1"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 15s-2-4-6-4H9c-4 0-6 4-6 4"></path>
+                        <path d="M3 21h18a2 2 0 002-2v-1H1v1a2 2 0 002 2z"></path>
+                        </svg>
+                        <span class="ml-4">Cuestionario</span>
                     </a>
                 </li>
 

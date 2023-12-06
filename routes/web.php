@@ -3,6 +3,7 @@
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CuestionarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,4 +48,15 @@ Route::post('/edit_data/{id}', [ExcelController::class, 'store'])->name('edit-da
 
 Route::resource('users', UserController::class);
 // Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
-Route::post('users/import', [UserController::class, 'import'])->name('users.import');
+//Route::post('users/import', [UserController::class, 'import'])->name('users.import');
+  //      return view('inicio');
+ //   })->name('inicio');
+    
+
+//Cuestionario
+Route::get('/cuestionarios', [CuestionarioController::class, 'index'])->name('cuestionarios.index');
+Route::get('/cuestionarios/create', [CuestionarioController::class, 'create'])->name('cuestionarios.create');
+Route::get('/cuestionarios/{cuestionario}/edit', [CuestionarioController::class, 'edit'])->name('cuestionarios.edit');
+Route::post('/cuestionarios', [CuestionarioController::class, 'sendData'])->name('cuestionarios.save');
+Route::put('/cuestionarios/{cuestionario}', [CuestionarioController::class, 'update'])->name('cuestionarios.update');
+Route::delete('/cuestionarios/{cuestionario}', [CuestionarioController::class, 'destroy'])->name('cuestionarios.delete');
