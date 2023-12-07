@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cuestionario;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CuestionarioController extends Controller
@@ -82,4 +83,27 @@ class CuestionarioController extends Controller
          $notificacion = 'El cuestionario "' . $tituloEliminar . '" se eliminó correctamente.';
          return redirect('/cuestionarios')->with(compact('notificacion'));
      }
+
+
+        // Nuevo método para asociar cuestionario con estudiantes
+        public function enviar(Cuestionario $cuestionario)
+        {
+            // Obtener todos los estudiantes
+            $estudiantes = User::whereHas('roles', function ($query) {
+                $query->where('name', 'estudiante');
+            })->get();
+        
+            // Asociar el cuestionario con cada estudiante
+            $cuestionario->estudiantes()->sync($estudiantes);
+        
+            // Mensaje de notificación
+            $notificacion = 'Cuestionario enviado a todos los estudiantes correctamente.';
+        
+            // Flash del mensaje en la sesión
+            session()->flash('notificacion', $notificacion);
+        
+            // Redirigir a la vista anterior
+            return redirect()->back();
+        }
+        
 }

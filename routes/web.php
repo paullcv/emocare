@@ -63,6 +63,9 @@ Route::post('/cuestionarios', [CuestionarioController::class, 'sendData'])->name
 Route::put('/cuestionarios/{cuestionario}', [CuestionarioController::class, 'update'])->name('cuestionarios.update');
 Route::delete('/cuestionarios/{cuestionario}', [CuestionarioController::class, 'destroy'])->name('cuestionarios.delete');
 
+Route::get('/cuestionarios/enviar/{cuestionario}', [CuestionarioController::class, 'enviar'])->name('cuestionarios.enviar');
+
+
 
 //Preguntas
 Route::get('/preguntas', [PreguntaController::class, 'index'])->name('preguntas.index');

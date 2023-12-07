@@ -21,4 +21,10 @@ class Cuestionario extends Model
     {
         return $this->belongsToMany(User::class, 'cuestionario_usuario', 'cuestionario_id', 'user_id');
     }
+
+    
+    public function estudiantes()
+    {
+        return $this->belongsToMany(User::class, 'cuestionario_usuario', 'cuestionario_id', 'user_id');
+    }
 }
