@@ -100,10 +100,10 @@ class CuestionarioController extends Controller
 
         // Enviar notificación por correo electrónico a cada estudiante
 
-       foreach ($estudiantes as $estudiante) {
+       //foreach ($estudiantes as $estudiante) {
             Mail::to('paul.cruz.4.pc@gmail.com')->send(new notificaciones($cuestionario));
             //Mail::to($estudiante->email)->send(new notificaciones($cuestionario));
-        }
+        //}
 
 
         // Mensaje de notificación
