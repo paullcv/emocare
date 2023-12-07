@@ -6,6 +6,7 @@ use App\Http\Controllers\PreguntaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CuestionarioController;
 use App\Http\Controllers\IAController;
+use App\Http\Controllers\RespuestaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,3 +78,11 @@ Route::delete('/preguntas/{pregunta}', [PreguntaController::class, 'destroy'])->
 
 
 Route::get('/ia', [IAController::class, 'analizarSentimientos'])->name('ia.index');
+
+
+//Respuestas
+// Rutas para CRUD de respuestas
+Route::get('/respuestas', [RespuestaController::class, 'index'])->name('responder.index');
+Route::post('/respuestas/{cuestionario}', [RespuestaController::class, 'guardarRespuestas'])->name('respuestas.guardar');
+Route::get('/respuestas/{cuestionario}', [RespuestaController::class, 'responder'])->name('respuesta.responder');
+

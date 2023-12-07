@@ -21,4 +21,9 @@ class Estudiante extends Model
         return $this->belongsTo(Curso::class);
     }
 
+    public function respuestas()
+    {
+        return $this->hasMany(Respuesta::class);
+    }
+
 }
