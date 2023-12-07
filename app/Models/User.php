@@ -61,11 +61,15 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    
+
     public function userable()
     {
         return $this->morphTo();
     }
 
-    
+    // En el modelo User
+    public function cuestionarios()
+    {
+        return $this->belongsToMany(Cuestionario::class, 'cuestionario_usuario', 'user_id', 'cuestionario_id');
+    }
 }

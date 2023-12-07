@@ -11,7 +11,14 @@ class Cuestionario extends Model
     protected $fillable = ['titulo', 'descripcion'];
 
     //Relacion uno a muchos con cuestionario
-    public function preguntas(){
+    public function preguntas()
+    {
         return $this->hasMany(Pregunta::class);
+    }
+
+    // En el modelo Cuestionario
+    public function usuarios()
+    {
+        return $this->belongsToMany(User::class, 'cuestionario_usuario', 'cuestionario_id', 'user_id');
     }
 }

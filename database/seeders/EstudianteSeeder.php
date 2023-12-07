@@ -17,15 +17,23 @@ class EstudianteSeeder extends Seeder
      */
     public function run(): void
     {
-        $cursoA = Curso::where('nombre', 'Curso 1ro')->first();
+        // Obtener todos los cursos disponibles
+        $cursos = Curso::all();
 
-        // Crear estudiante en Curso A
-        $estudianteA = $this->createEstudiante('estudianteA@example.com', 'Estudiante A', 'Estudiante Observacion A', $cursoA);
+        // Definir la cantidad de estudiantes que deseas crear
+        $cantidadEstudiantes = 100;
 
-        $cursoB = Curso::where('nombre', 'Curso 2do')->first();
-
-        // Crear estudiante en Curso B
-        $estudianteB = $this->createEstudiante('estudianteB@example.com', 'Estudiante B', 'Estudiante Observacion B', $cursoB);
+        // Crear estudiantes en cada curso
+        foreach ($cursos as $curso) {
+            for ($i = 0; $i < $cantidadEstudiantes; $i++) {
+                $this->createEstudiante(
+                    "estudiante{$i}@example.com",
+                    "Estudiante {$i}",
+                    "Observación para Estudiante {$i}",
+                    $curso
+                );
+            }
+        }
     }
 
     private function createEstudiante($email, $name, $observacion, $curso)
@@ -39,8 +47,9 @@ class EstudianteSeeder extends Seeder
         $user = User::create([
             'email' => strtolower($email),
             'name' => $name,
-            'password' => Hash::make('password'), // Usar Hash::make para encriptar la contraseña
+            'password' => bcrypt('password'), // Usa bcrypt para encriptar la contraseña
         ]);
+        
 
         $estudiante = Estudiante::create([
             'observacion' => $observacion,
@@ -48,7 +57,6 @@ class EstudianteSeeder extends Seeder
             'curso_id' => $curso->id,
         ]);
 
-        // Asignar el rol 'estudiante' al usuario
         $estudianteRole = Role::where('name', 'estudiante')->first();
         $user->assignRole($estudianteRole);
 

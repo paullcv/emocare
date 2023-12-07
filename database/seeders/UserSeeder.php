@@ -21,6 +21,23 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        // Crear usuario Paul
+        $this->createUser('paul@gmail.com', 'Paul', 'password');
 
+        // Crear usuario Karla
+        $this->createUser('karla@gmail.com', 'Karla', 'password');
+    }
+
+    private function createUser($email, $name, $password)
+    {
+        $existingUser = User::where('email', $email)->first();
+
+        if (!$existingUser) {
+            User::create([
+                'email' => strtolower($email),
+                'name' => $name,
+                'password' => Hash::make($password),
+            ]);
+        }
     }
 }
