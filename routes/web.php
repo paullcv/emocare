@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PreguntaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CuestionarioController;
+use App\Http\Controllers\IAController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,3 +71,6 @@ Route::post('/preguntas', [PreguntaController::class, 'sendData'])->name('pregun
 Route::get('/preguntas/{pregunta}/edit', [PreguntaController::class, 'edit'])->name('preguntas.edit');
 Route::put('/preguntas/{pregunta}', [PreguntaController::class, 'update'])->name('preguntas.update');
 Route::delete('/preguntas/{pregunta}', [PreguntaController::class, 'destroy'])->name('preguntas.delete');
+
+
+Route::get('/ia', [IAController::class, 'analizarSentimientos'])->name('ia.index');
