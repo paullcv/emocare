@@ -42,13 +42,18 @@ class RespuestaController extends Controller
 
         $this->validate($request, $rules, $messages);
 
-        // Guardar las respuestas
+        // Guardar las respuestas con análisis de sentimientos
         foreach ($cuestionario->preguntas as $pregunta) {
             $respuesta = new Respuesta([
                 'respuesta' => $request->input("respuestas.{$pregunta->id}"),
                 'pregunta_id' => $pregunta->id,
                 'estudiante_id' => auth()->user()->id, // o donde obtengas el ID del estudiante
             ]);
+
+            // Analizar sentimientos y asignar el resultado al atributo 'sentimiento'
+            $sentimiento = $this->analizarSentimientos($respuesta->respuesta);
+            $respuesta->sentimiento = $sentimiento;
+
             $respuesta->save();
         }
 
@@ -57,5 +62,48 @@ class RespuestaController extends Controller
 
         // Redireccionar a la página que prefieras
         return redirect()->route('responder.index')->with(compact('notificacion'));
+    }
+
+    
+    // Función para analizar sentimientos
+    private function analizarSentimientos($texto)
+    {
+        // Aquí llamamos a tu función analizarSentimientos() y devolvemos el resultado
+        // Asegúrate de que la función devuelva "positivo", "negativo" o "neutral" según tus necesidades.
+        return $this->llamarAnalisisSentimientos($texto);
+    }
+
+    // Función para llamar al análisis de sentimientos
+    private function llamarAnalisisSentimientos($texto)
+    {
+        // Aquí llamas a tu función analizarSentimientos() desde el controlador IA
+        // Ajusta según tu estructura y requisitos específicos.
+        // El código exacto dependerá de cómo hayas implementado tu análisis de sentimientos.
+
+        $rutamodelo = public_path('bert_classifier.tflite');
+        $scriptPath = base_path('IASentimientos/analisisSM.py');
+        $venvPath = base_path('IASentimientos/venv');
+
+        $command = "\"$venvPath/Scripts/activate\" && \"$venvPath/Scripts/python\" \"$scriptPath\" \"$rutamodelo\" \"$texto\"";
+        $output = shell_exec($command);
+
+        // Transformar el resultado según tus necesidades
+        return $this->transformarSentimiento($output);
+    }
+
+    // Función para transformar el resultado del análisis de sentimientos
+    private function transformarSentimiento($resultado)
+    {
+        // Lógica para transformar el resultado en "positivo", "negativo" o "neutral"
+        // Ajusta según lo que realmente devuelve tu análisis de sentimientos.
+
+        // Ejemplo básico (ajusta según tu implementación real):
+        if (strpos($resultado, 'positive') !== false) {
+            return 'positivo';
+        } elseif (strpos($resultado, 'negative') !== false) {
+            return 'negativo';
+        } else {
+            return 'neutral';
+        }
     }
 }

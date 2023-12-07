@@ -18,11 +18,8 @@ def translate_to_english(text):
         return f"Error en la traducción: {str(e)}"
 
 # Ejemplo de traducción
-#sentence_es = 'Yo me siento bien por que recien obtuve mi titulo de ingeniero en sistemas y quiero logar todos mis objetivos este año proximo'
 sentence_en = translate_to_english(INPUT_TEXT)
 
-#print('Oración en español:', INPUT_TEXT)
-#print('Oración traducida al inglés:', sentence_en)
 
 # STEP 2: Create an TextClassifier object.
 base_options = python.BaseOptions(model_asset_path=model_path)
