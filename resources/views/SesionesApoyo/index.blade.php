@@ -39,8 +39,12 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $sesion->fecha }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $sesion->hora }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $sesion->estudiante->user->name }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $sesion->observacion }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $sesion->recomendacion }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap overflow-hidden overflow-ellipsis max-w-[200px]">
+                                    {{ $sesion->observacion }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap overflow-hidden overflow-ellipsis max-w-[200px]">
+                                    {{ $sesion->recomendacion }}
+                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <!-- Acciones -->
                                     <a href="{{ route('sesiones.edit', $sesion->id) }}" class="text-blue-500 hover:underline">

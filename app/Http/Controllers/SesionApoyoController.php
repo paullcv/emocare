@@ -83,4 +83,13 @@ class SesionApoyoController extends Controller
         $sesiones = $estudiante->sesionesApoyo;
         return view('sesionesApoyo.missesiones', compact('sesiones'));
     }
+
+    public function misRecomendaciones(SesionApoyo $sesionapoyo)
+    {
+        // Aquí puedes realizar lógica para obtener la recomendación asociada a la sesión de apoyo
+        $recomendacion = $sesionapoyo->recomendacion;
+
+        // Puedes pasar la recomendación a la vista
+        return view('sesionesApoyo.misrecomendaciones', compact('recomendacion', 'sesionapoyo'));
+    }
 }

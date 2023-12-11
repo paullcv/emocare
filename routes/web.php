@@ -103,3 +103,4 @@ Route::put('/sesionesApoyo/{sesion}', [SesionApoyoController::class, 'update'])-
 Route::delete('/sesionesApoyo/{sesion}', [SesionApoyoController::class, 'destroy'])->name('sesiones.delete');
 
 Route::get('/misSesiones', [SesionApoyoController::class, 'misSesiones'])->name('missesiones.index');
+Route::get('/misSesiones/recomendacion/{sesionapoyo}', [SesionApoyoController::class, 'misRecomendaciones'])->name('misrecomendaciones.index');
