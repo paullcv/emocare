@@ -84,8 +84,8 @@ class RespuestaController extends Controller
         $scriptPath = base_path('IASentimientos/analisisSM.py');
         $venvPath = base_path('IASentimientos/venv');
 
-        $command = "\"$venvPath/Scripts/activate\" && \"$venvPath/Scripts/python\" \"$scriptPath\" \"$rutamodelo\" \"$texto\"";
-        $output = shell_exec($command);
+            $command = "\"$venvPath/Scripts/activate\" && \"$venvPath/Scripts/python\" \"$scriptPath\" \"$rutamodelo\" \"$texto\"";
+            $output = shell_exec($command);
 
         // Transformar el resultado según tus necesidades
         return $this->transformarSentimiento($output);

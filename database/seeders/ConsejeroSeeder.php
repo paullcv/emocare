@@ -16,7 +16,8 @@ class ConsejeroSeeder extends Seeder
      */
     public function run(): void
     {
-        $consejero = $this->createConsejero('consejero@example.com', 'Consejero User', 'Consejero Especialidad');
+        $consejero = $this->createConsejero('consejero@gmail.com', 'Consejero User', 'Consejero Especialidad');
+        $consejero = $this->createConsejero('paulvargas@gmail.com', 'Consejero Paul', 'Consejero Especialidad');
     }
 
     private function createConsejero($email, $name, $especialidad)

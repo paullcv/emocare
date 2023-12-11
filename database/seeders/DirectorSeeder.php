@@ -16,7 +16,8 @@ class DirectorSeeder extends Seeder
      */
     public function run(): void
     {
-        $director = $this->createDirector('director@example.com', 'Director User', 'Director Cargo');
+        $director = $this->createDirector('director@gamil.com', 'Director User', 'Director');
+        $director = $this->createDirector('paulcruz@gmail.com', 'Director Paul', 'Director');
 
     }
 
