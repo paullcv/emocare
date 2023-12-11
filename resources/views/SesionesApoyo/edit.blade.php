@@ -7,6 +7,12 @@
         </h2>
     </div>
 
+    <div class="flex justify-between items-center mb-6">
+        <a href="{{ route('sesiones.index') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+           Ver Sesiones de Apoyo
+        </a>
+    </div>
+
     <div class="container mx-auto p-4">
         <form action="{{ route('sesiones.update', $sesion->id) }}" method="POST">
             @csrf
@@ -56,6 +62,24 @@
                     <!-- Estudiantes se cargarán dinámicamente con JavaScript -->
                 </select>
                 @error('estudiante_id')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+              <!-- Nuevo campo Observación -->
+              <div class="mb-4">
+                <label for="observacion" class="block text-sm font-medium text-gray-700">Observación</label>
+                <textarea name="observacion" id="observacion" class="mt-1 p-2 w-full border rounded-md">{{ $sesion->observacion }}</textarea>
+                @error('observacion')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <!-- Nuevo campo Recomendación -->
+            <div class="mb-4">
+                <label for="recomendacion" class="block text-sm font-medium text-gray-700">Recomendación</label>
+                <textarea name="recomendacion" id="recomendacion" class="mt-1 p-2 w-full border rounded-md">{{ $sesion->recomendacion }}</textarea>
+                @error('recomendacion')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
             </div>

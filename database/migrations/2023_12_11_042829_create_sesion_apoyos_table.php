@@ -18,6 +18,8 @@ return new class extends Migration
             $table->date('fecha');
             $table->time('hora');
             $table->unsignedBigInteger('estudiante_id');
+            $table->text('observacion')->nullable();
+            $table->text('recomendacion')->nullable();
             
             $table->foreign('estudiante_id')->references('id')->on('estudiante');
             

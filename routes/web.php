@@ -101,3 +101,5 @@ Route::post('/sesionesApoyo', [SesionApoyoController::class, 'sendData'])->name(
 Route::get('/sesionesApoyo/{sesion}/edit', [SesionApoyoController::class, 'edit'])->name('sesiones.edit');
 Route::put('/sesionesApoyo/{sesion}', [SesionApoyoController::class, 'update'])->name('sesiones.update');
 Route::delete('/sesionesApoyo/{sesion}', [SesionApoyoController::class, 'destroy'])->name('sesiones.delete');
+
+Route::get('/misSesiones', [SesionApoyoController::class, 'misSesiones'])->name('missesiones.index');

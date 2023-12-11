@@ -9,7 +9,7 @@ class SesionApoyo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['motivo','fecha','hora','estudiante_id'];
+    protected $fillable = ['motivo','fecha','hora','estudiante_id','observacion','recomendacion'];
 
     public function estudiante(){
         return $this->belongsTo(Estudiante::class);

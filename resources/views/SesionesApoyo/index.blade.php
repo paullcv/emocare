@@ -25,6 +25,8 @@
                             <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Fecha</th>
                             <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Hora</th>
                             <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Estudiante</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Observación</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Recomendación</th>
                             <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Acciones</th>
                         </tr>
                     </thead>
@@ -37,7 +39,10 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $sesion->fecha }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $sesion->hora }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $sesion->estudiante->user->name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $sesion->observacion }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $sesion->recomendacion }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
+                                    <!-- Acciones -->
                                     <a href="{{ route('sesiones.edit', $sesion->id) }}" class="text-blue-500 hover:underline">
                                         <i class="fas fa-edit"></i> Editar
                                     </a>

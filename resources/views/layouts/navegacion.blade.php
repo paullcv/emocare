@@ -146,6 +146,23 @@
                     @endif
                 @endauth
 
+
+                @auth
+                @if (auth()->user()->hasRole(['estudiante']))
+                    <li class="relative px-6 py-3">
+                        <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 hover:text-blue-300 dark:hover:text-blue-200"
+                            href="{{ route('missesiones.index') }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
+                                viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                                <path
+                                    fill=white d="M96 32V64H48C21.5 64 0 85.5 0 112v48H448V112c0-26.5-21.5-48-48-48H352V32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H160V32c0-17.7-14.3-32-32-32S96 14.3 96 32zM448 192H0V464c0 26.5 21.5 48 48 48H400c26.5 0 48-21.5 48-48V192zM224 248c13.3 0 24 10.7 24 24v56h56c13.3 0 24 10.7 24 24s-10.7 24-24 24H248v56c0 13.3-10.7 24-24 24s-24-10.7-24-24V376H144c-13.3 0-24-10.7-24-24s10.7-24 24-24h56V272c0-13.3 10.7-24 24-24z" />
+                            </svg>
+                            <span class="ml-4">Mis Sesiones de Apoyo</span>
+                        </a>
+                    </li>
+                @endif
+            @endauth
+
             </ul>
         </ul>
     </div>
