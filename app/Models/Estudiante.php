@@ -26,4 +26,8 @@ class Estudiante extends Model
         return $this->hasMany(Respuesta::class);
     }
 
+    public function sesionesApoyo(){
+        return $this->hasMany(SesionApoyo::class);
+    }
+
 }

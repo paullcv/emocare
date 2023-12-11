@@ -8,6 +8,7 @@ use App\Http\Controllers\CuestionarioController;
 use App\Http\Controllers\IAController;
 use App\Http\Controllers\PerfilEmocionaleController;
 use App\Http\Controllers\RespuestaController;
+use App\Http\Controllers\SesionApoyoController;
 use App\Models\PerfilEmocionale;
 
 /*
@@ -93,3 +94,10 @@ Route::get('/respuestas/{cuestionario}', [RespuestaController::class, 'responder
 Route::get('/perfilEmocional', [PerfilEmocionaleController::class, 'index'])->name('perfilEmocional.index');
 Route::get('/perfilemocional/{estudiante}', [PerfilEmocionaleController::class, 'ver'])->name('perfilemocional.ver');
 
+//Sesion de Apoyo
+Route::get('/sesionesApoyo', [SesionApoyoController::class, 'index'])->name('sesiones.index');
+Route::get('/sesionesApoyo/create', [SesionApoyoController::class, 'create'])->name('sesiones.create');
+Route::post('/sesionesApoyo', [SesionApoyoController::class, 'sendData'])->name('sesiones.save');
+Route::get('/sesionesApoyo/{sesion}/edit', [SesionApoyoController::class, 'edit'])->name('sesiones.edit');
+Route::put('/sesionesApoyo/{sesion}', [SesionApoyoController::class, 'update'])->name('sesiones.update');
+Route::delete('/sesionesApoyo/{sesion}', [SesionApoyoController::class, 'destroy'])->name('sesiones.delete');
