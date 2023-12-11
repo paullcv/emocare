@@ -37,13 +37,23 @@
             </div>
 
             <div class="mb-4">
-                <label for="estudiante_id" class="block text-sm font-medium text-gray-700">Estudiante</label>
-                <select name="estudiante_id" id="estudiante_id" class="mt-1 p-2 w-full border rounded-md">
-                    @foreach ($estudiantes as $estudiante)
-                        <option value="{{ $estudiante->id }}" {{ $sesion->estudiante_id == $estudiante->id ? 'selected' : '' }}>
-                            {{ $estudiante->user->name }}
+                <label for="curso_id" class="block text-sm font-medium text-gray-700">Curso</label>
+                <select name="curso_id" id="curso_id" class="mt-1 p-2 w-full border rounded-md">
+                    @foreach ($cursos as $curso)
+                        <option value="{{ $curso->id }}" {{ $sesion->estudiante->curso_id == $curso->id ? 'selected' : '' }}>
+                            {{ $curso->nombre }}
                         </option>
                     @endforeach
+                </select>
+                @error('curso_id')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <label for="estudiante_id" class="block text-sm font-medium text-gray-700">Estudiante</label>
+                <select name="estudiante_id" id="estudiante_id" class="mt-1 p-2 w-full border rounded-md">
+                    <!-- Estudiantes se cargarán dinámicamente con JavaScript -->
                 </select>
                 @error('estudiante_id')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -57,4 +67,39 @@
             </div>
         </form>
     </div>
+
+    @push('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cursoSelect = document.getElementById('curso_id');
+            const estudianteSelect = document.getElementById('estudiante_id');
+    
+            cursoSelect.addEventListener('change', function () {
+                const selectedCursoId = cursoSelect.value;
+                console.log('Curso seleccionado:', selectedCursoId);
+
+                estudianteSelect.innerHTML = '';
+    
+                const estudiantes = @json($estudiantes);
+    
+                console.log('Lista de todos los estudiantes:', estudiantes);
+    
+                const estudiantesCurso = estudiantes.filter(estudiante => estudiante.curso_id == selectedCursoId);
+    
+                console.log('Estudiantes asociados al curso seleccionado:', estudiantesCurso);
+    
+                estudiantesCurso.forEach(estudiante => {
+                    const option = document.createElement('option');
+                    option.value = estudiante.id;
+                    option.textContent = estudiante.user.name;
+                    estudianteSelect.appendChild(option);
+                });
+            });
+
+            // Simular el cambio inicial para cargar los estudiantes del curso seleccionado
+            cursoSelect.dispatchEvent(new Event('change'));
+        });
+    </script>
+    @endpush
+
 @endsection

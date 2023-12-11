@@ -41,8 +41,9 @@ class SesionApoyoController extends Controller
 
     public function edit(SesionApoyo $sesion)
     {
-        $estudiantes = Estudiante::all();
-        return view('sesionesApoyo.edit', compact('sesion', 'estudiantes'));
+        $estudiantes = Estudiante::with('user')->get();
+        $cursos = Curso::all();
+        return view('sesionesApoyo.edit', compact('sesion', 'estudiantes','cursos'));
     }
 
     public function update(Request $request, SesionApoyo $sesion)
@@ -50,8 +51,8 @@ class SesionApoyoController extends Controller
         $request->validate([
             'motivo' => 'required',
             'fecha' => 'required|date',
-            'hora' => 'required|date_format:H:i',
-            'estudiante_id' => 'required|exists:estudiantes,id',
+            'hora' => 'required',
+            'estudiante_id' => 'required|exists:estudiante,id',
         ]);
 
         $sesion->update($request->all());
