@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Curso;
 use App\Models\Estudiante;
 use App\Models\SesionApoyo;
 use App\Models\User;
@@ -17,9 +18,12 @@ class SesionApoyoController extends Controller
 
     public function create()
     {
-        $estudiantes = Estudiante::all();
-        return view('sesionesApoyo.create', compact('estudiantes'));
+        $estudiantes = Estudiante::with('user')->get();
+        $cursos = Curso::all();
+        return view('sesionesApoyo.create', compact('estudiantes', 'cursos'));
     }
+
+
 
     public function sendData(Request $request)
     {
@@ -27,7 +31,7 @@ class SesionApoyoController extends Controller
             'motivo' => 'required',
             'fecha' => 'required|date',
             'hora' => 'required|date_format:H:i',
-            'estudiante_id' => 'required|exists:estudiantes,id',
+            'estudiante_id' => 'required|exists:estudiante,id',
         ]);
 
         SesionApoyo::create($request->all());

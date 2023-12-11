@@ -12,8 +12,19 @@ class CursosSeeder extends Seeder
      */
     public function run(): void
     {
-        Curso::create(['nombre' => 'Curso 1ro']);
-        Curso::create(['nombre' => 'Curso 2do']);
-        Curso::create(['nombre' => 'Curso 3ro']);
+        Curso::create(['nombre' => 'Curso 1ro A']);
+        Curso::create(['nombre' => 'Curso 1ro B']);
+        Curso::create(['nombre' => 'Curso 1ro C']);
+        Curso::create(['nombre' => 'Curso 2do A']);
+        Curso::create(['nombre' => 'Curso 2do B']);
+        Curso::create(['nombre' => 'Curso 2do C']);
+        Curso::create(['nombre' => 'Curso 3ro A']);
+        Curso::create(['nombre' => 'Curso 3ro B']);
+        Curso::create(['nombre' => 'Curso 4to A']);
+        Curso::create(['nombre' => 'Curso 4to B']);
+        Curso::create(['nombre' => 'Curso 5to A']);
+        Curso::create(['nombre' => 'Curso 5to B']);
+        Curso::create(['nombre' => 'Curso 6to A']);
+        Curso::create(['nombre' => 'Curso 6to B']);
     }
 }

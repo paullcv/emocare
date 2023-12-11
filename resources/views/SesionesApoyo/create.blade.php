@@ -36,17 +36,28 @@
             </div>
 
             <div class="mb-4">
+                <label for="curso_id" class="block text-sm font-medium text-gray-700">Curso</label>
+                <select name="curso_id" id="curso_id" class="mt-1 p-2 w-full border rounded-md">
+                    @foreach ($cursos as $curso)
+                        <option value="{{ $curso->id }}">{{ $curso->nombre }}</option>
+                    @endforeach
+                </select>
+                @error('curso_id')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+            
+
+            <div class="mb-4">
                 <label for="estudiante_id" class="block text-sm font-medium text-gray-700">Estudiante</label>
                 <select name="estudiante_id" id="estudiante_id" class="mt-1 p-2 w-full border rounded-md">
-                    @foreach ($estudiantes as $estudiante)
-                        <option value="{{ $estudiante->id }}">{{ $estudiante->nombre }}</option>
-                    @endforeach
+                    <!-- Estudiantes se cargarán dinámicamente con JavaScript -->
                 </select>
                 @error('estudiante_id')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
             </div>
-
+            
             <div class="mt-6">
                 <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                     Crear Sesión de Apoyo
@@ -54,4 +65,39 @@
             </div>
         </form>
     </div>
+
+    @push('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cursoSelect = document.getElementById('curso_id');
+            const estudianteSelect = document.getElementById('estudiante_id');
+    
+            cursoSelect.addEventListener('change', function () {
+                const selectedCursoId = cursoSelect.value;
+                console.log('Curso seleccionado:', selectedCursoId);
+
+                estudianteSelect.innerHTML = '';
+    
+                const estudiantes = @json($estudiantes);
+    
+                console.log('Lista de todos los estudiantes:', estudiantes);
+    
+                const estudiantesCurso = estudiantes.filter(estudiante => estudiante.curso_id == selectedCursoId);
+    
+                console.log('Estudiantes asociados al curso seleccionado:', estudiantesCurso);
+    
+                estudiantesCurso.forEach(estudiante => {
+                    const option = document.createElement('option');
+                    option.value = estudiante.id;
+                    option.textContent = estudiante.user.name;
+                    estudianteSelect.appendChild(option);
+                });
+            });
+        });
+    </script>
+    
+    
+    @endpush
+    
+
 @endsection

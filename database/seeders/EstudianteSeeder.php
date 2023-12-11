@@ -9,6 +9,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Faker\Factory as FakerFactory;
+
 
 class EstudianteSeeder extends Seeder
 {
@@ -20,21 +22,25 @@ class EstudianteSeeder extends Seeder
         // Obtener todos los cursos disponibles
         $cursos = Curso::all();
 
-        // Definir la cantidad de estudiantes que deseas crear
-        $cantidadEstudiantes = 100;
+        // Definir la cantidad de estudiantes que deseas crear por cada curso
+        $estudiantesPorCurso = 30;
 
-        // Crear estudiantes en cada curso
+        // Crear una instancia de Faker
+        $faker = FakerFactory::create();
+
         foreach ($cursos as $curso) {
-            for ($i = 0; $i < $cantidadEstudiantes; $i++) {
+            // Crear la cantidad específica de estudiantes para cada curso
+            for ($i = 0; $i < $estudiantesPorCurso; $i++) {
                 $this->createEstudiante(
-                    "estudiante{$i}@example.com",
-                    "Estudiante {$i}",
-                    "Observación para Estudiante {$i}",
+                    $faker->unique()->safeEmail,
+                    $faker->name,
+                    "Observación para Estudiante {$curso->id}_{$i}",
                     $curso
                 );
             }
         }
     }
+    
 
     private function createEstudiante($email, $name, $observacion, $curso)
     {
@@ -47,9 +53,8 @@ class EstudianteSeeder extends Seeder
         $user = User::create([
             'email' => strtolower($email),
             'name' => $name,
-            'password' => bcrypt('password'), // Usa bcrypt para encriptar la contraseña
+            'password' => bcrypt('password'), // Cambiar a una contraseña segura
         ]);
-        
 
         $estudiante = Estudiante::create([
             'observacion' => $observacion,

@@ -14,7 +14,7 @@
 
             <div class="mb-4">
                 <label for="motivo" class="block text-sm font-medium text-gray-700">Motivo</label>
-                <input type="text" name="motivo" id="motivo" class="mt-1 p-2 w-full border rounded-md" value="{{ old('motivo', $sesion->motivo) }}">
+                <input type="text" name="motivo" id="motivo" class="mt-1 p-2 w-full border rounded-md" value="{{ $sesion->motivo }}">
                 @error('motivo')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
@@ -22,7 +22,7 @@
 
             <div class="mb-4">
                 <label for="fecha" class="block text-sm font-medium text-gray-700">Fecha</label>
-                <input type="date" name="fecha" id="fecha" class="mt-1 p-2 w-full border rounded-md" value="{{ old('fecha', $sesion->fecha) }}">
+                <input type="date" name="fecha" id="fecha" class="mt-1 p-2 w-full border rounded-md" value="{{ $sesion->fecha }}">
                 @error('fecha')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
@@ -30,7 +30,7 @@
 
             <div class="mb-4">
                 <label for="hora" class="block text-sm font-medium text-gray-700">Hora</label>
-                <input type="time" name="hora" id="hora" class="mt-1 p-2 w-full border rounded-md" value="{{ old('hora', $sesion->hora) }}">
+                <input type="time" name="hora" id="hora" class="mt-1 p-2 w-full border rounded-md" value="{{ $sesion->hora }}">
                 @error('hora')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
@@ -40,8 +40,8 @@
                 <label for="estudiante_id" class="block text-sm font-medium text-gray-700">Estudiante</label>
                 <select name="estudiante_id" id="estudiante_id" class="mt-1 p-2 w-full border rounded-md">
                     @foreach ($estudiantes as $estudiante)
-                        <option value="{{ $estudiante->id }}" {{ old('estudiante_id', $sesion->estudiante_id) == $estudiante->id ? 'selected' : '' }}>
-                            {{ $estudiante->nombre }}
+                        <option value="{{ $estudiante->id }}" {{ $sesion->estudiante_id == $estudiante->id ? 'selected' : '' }}>
+                            {{ $estudiante->user->name }}
                         </option>
                     @endforeach
                 </select>
@@ -58,4 +58,3 @@
         </form>
     </div>
 @endsection
- 
