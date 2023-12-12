@@ -9,14 +9,13 @@ class PerfilEmocionaleController extends Controller
 {
     public function index()
     {
-        // Obtener todos los usuarios con el rol "estudiante"
         $estudiantes = User::whereHas('roles', function ($query) {
             $query->where('name', 'estudiante');
-        })->get();
+        })->with('userable.curso')->paginate(25); // Cambia 10 por la cantidad de registros por página que desees
 
-        // Pasar los estudiantes a la vista
         return view('perfilemocional.index', compact('estudiantes'));
     }
+
 
     public function ver(User $estudiante)
     {

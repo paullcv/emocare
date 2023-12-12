@@ -30,4 +30,6 @@ class Estudiante extends Model
         return $this->hasMany(SesionApoyo::class);
     }
 
+   
+
 }

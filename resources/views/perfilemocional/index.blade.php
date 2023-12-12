@@ -9,20 +9,26 @@
                 <tr>
                     <th class="py-2 px-4 border-b">Nombre</th>
                     <th class="py-2 px-4 border-b">Email</th>
+                    <th class="py-2 px-4 border-b">Curso</th>
                     <th class="py-2 px-4 border-b">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($estudiantes as $estudiante)
                     <tr>
-                        <td class="py-2 px-4 border-b">{{ $estudiante->name }}</td>
-                        <td class="py-2 px-4 border-b">{{ $estudiante->email }}</td>
-                        <td class="py-2 px-4 border-b">
+                        <td class="py-2 px-4 border-b text-center">{{ $estudiante->name }}</td>
+                        <td class="py-2 px-4 border-b text-center">{{ $estudiante->email }}</td>
+                        <td class="py-2 px-4 border-b text-center">{{ optional($estudiante->userable)->curso->nombre }}</td>
+                        <td class="py-2 px-4 border-b text-center">
                             <a href="{{ route('perfilemocional.ver', $estudiante->id) }}" class="text-blue-500 hover:underline">Ver Sentimientos</a>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        <div class="mt-4">
+            {{ $estudiantes->links() }}
+        </div>
+        
     </div>
 @endsection

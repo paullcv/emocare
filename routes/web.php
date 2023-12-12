@@ -53,11 +53,7 @@ Route::post('/edit_data/{id}', [ExcelController::class, 'store'])->name('edit-da
 //---------------------------------------------------------------------------------------------
 
 Route::resource('users', UserController::class);
-// Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
-//Route::post('users/import', [UserController::class, 'import'])->name('users.import');
-  //      return view('inicio');
- //   })->name('inicio');
-    
+
 
 //Cuestionario
 Route::get('/cuestionarios', [CuestionarioController::class, 'index'])->name('cuestionarios.index');
