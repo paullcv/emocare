@@ -16,12 +16,12 @@ class DirectorSeeder extends Seeder
      */
     public function run(): void
     {
-        $director = $this->createDirector('director@gamil.com', 'Director User', 'Director');
-        $director = $this->createDirector('paulcruz@gmail.com', 'Director Paul', 'Director');
+        $director = $this->createDirector('director@gamil.com', 'Director User', 'Director','masculino');
+        $director = $this->createDirector('paulcruz@gmail.com', 'Director Paul', 'Director','masculino');
 
     }
 
-    private function createDirector($email, $name, $cargo)
+    private function createDirector($email, $name, $cargo, $sexo)
     {
         $existingUser = User::where('email', $email)->first();
 
@@ -33,7 +33,7 @@ class DirectorSeeder extends Seeder
             'email' => strtolower($email),
             'name' => $name,
             'password' => Hash::make('password'), // Usar Hash::make para encriptar la contraseña
-
+            'sexo' => $sexo, // Agregar el género directamente al usuario
         ]);
 
         $director = Director::create([

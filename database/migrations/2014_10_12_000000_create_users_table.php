@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('sexo')->nullable(); // Agregar el campo 'sexo' directamente al usuario
+
             $table->rememberToken();
 
             $table->unsignedBigInteger('userable_id')->nullable();

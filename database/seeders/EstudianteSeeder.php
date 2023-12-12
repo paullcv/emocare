@@ -34,15 +34,15 @@ class EstudianteSeeder extends Seeder
                 $this->createEstudiante(
                     $faker->unique()->safeEmail,
                     $faker->name,
+                    $faker->randomElement(['masculino', 'femenino']),
                     "Observación para Estudiante {$curso->id}_{$i}",
                     $curso
                 );
             }
         }
     }
-    
 
-    private function createEstudiante($email, $name, $observacion, $curso)
+    private function createEstudiante($email, $name, $sexo, $observacion, $curso)
     {
         $existingUser = User::where('email', $email)->first();
 
@@ -54,6 +54,7 @@ class EstudianteSeeder extends Seeder
             'email' => strtolower($email),
             'name' => $name,
             'password' => bcrypt('password'), // Cambiar a una contraseña segura
+            'sexo' => $sexo, // Agregar el género directamente al usuario
         ]);
 
         $estudiante = Estudiante::create([

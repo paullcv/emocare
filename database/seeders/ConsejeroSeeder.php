@@ -16,11 +16,11 @@ class ConsejeroSeeder extends Seeder
      */
     public function run(): void
     {
-        $consejero = $this->createConsejero('consejero@gmail.com', 'Consejero User', 'Consejero Especialidad');
-        $consejero = $this->createConsejero('paulvargas@gmail.com', 'Consejero Paul', 'Consejero Especialidad');
+        $consejero = $this->createConsejero('consejero@gmail.com', 'Consejero User', 'Consejero Especialidad','masculino');
+        $consejero = $this->createConsejero('paulvargas@gmail.com', 'Consejero Paul', 'Consejero Especialidad','masculino');
     }
 
-    private function createConsejero($email, $name, $especialidad)
+    private function createConsejero($email, $name, $especialidad, $sexo)
     {
         $existingUser = User::where('email', $email)->first();
 
@@ -32,6 +32,7 @@ class ConsejeroSeeder extends Seeder
             'email' => strtolower($email),
             'name' => $name,
             'password' => Hash::make('password'),
+            'sexo' => $sexo, // Agregar el género directamente al usuario
         ]);
 
         $consejero = Consejero::create([
