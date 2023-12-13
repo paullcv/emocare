@@ -5,4 +5,11 @@
             Inicio
         </h2>
     </div>
+    @livewire('respuestas-chart')
+
 @endsection
+
+@section('js')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+@stop
+
