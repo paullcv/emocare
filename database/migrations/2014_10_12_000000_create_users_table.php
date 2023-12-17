@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('sexo')->nullable(); // Agregar el campo 'sexo' directamente al usuario
+            $table->unsignedInteger('edad')->nullable(); // Agrega el campo 'edad'
 
             $table->rememberToken();
 

@@ -45,30 +45,34 @@ class EstudianteSeeder extends Seeder
     private function createEstudiante($email, $name, $sexo, $observacion, $curso)
     {
         $existingUser = User::where('email', $email)->first();
-
+    
         if ($existingUser) {
             return $existingUser->userable;
         }
-
+    
+        $edad = mt_rand(12, 18); // Generar edad aleatoria entre 12 y 18 años
+    
         $user = User::create([
             'email' => strtolower($email),
             'name' => $name,
             'password' => bcrypt('password'), // Cambiar a una contraseña segura
             'sexo' => $sexo, // Agregar el género directamente al usuario
+            'edad' => $edad, // Agregar la edad directamente al usuario
         ]);
-
+    
         $estudiante = Estudiante::create([
             'observacion' => $observacion,
             'user_id' => $user->id,
             'curso_id' => $curso->id,
         ]);
-
+    
         $estudianteRole = Role::where('name', 'estudiante')->first();
         $user->assignRole($estudianteRole);
-
+    
         $user->userable()->associate($estudiante);
         $user->save();
-
+    
         return $estudiante;
     }
+    
 }

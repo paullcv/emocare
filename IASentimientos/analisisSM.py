@@ -5,10 +5,8 @@ import sys
 from googletrans import Translator
 from googletrans import Translator
 
-
 INPUT_TEXT = sys.argv[2]
 model_path = sys.argv[1]
-
 def translate_to_english(text):
     translator = Translator()
     try:
