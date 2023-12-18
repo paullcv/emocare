@@ -11,6 +11,15 @@
             <p class="font-semibold">Email: {{ $estudiante->email }}</p>
         </div>
 
+        <div class="mb-4">
+            <p class="font-semibold">Totales de Perfil Emocional:</p>
+            <ul>
+                <li>Positivo: {{ $totalPositivo }}</li>
+                <li>Negativo: {{ $totalNegativo }}</li>
+                <li>Neutral: {{ $totalNeutral }}</li>
+            </ul>
+        </div>
+
         @if ($respuestas)
             <table class="min-w-full border border-gray-300">
                 <thead>
@@ -31,7 +40,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td class="border px-4 py-2" colspan="3">No hay respuestas disponibles.</td>
+                            <td class="border px-4 py-2" colspan="4">No hay respuestas disponibles.</td>
                         </tr>
                     @endforelse
                 </tbody>

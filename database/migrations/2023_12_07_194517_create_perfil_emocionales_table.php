@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('perfil_emocionales', function (Blueprint $table) {
             $table->id();
-            
-            $table->string('veredicto');
-            $table->unsignedBigInteger('estudiante_id');
 
-            $table->foreign('estudiante_id')->references('id')->on('users');
+            $table->unsignedBigInteger('estudiante_id');
+            $table->integer('resume_positivo')->nullable();
+            $table->integer('resume_negativo')->nullable();
+            $table->integer('resume_neutral')->nullable();
+
+
+            $table->foreign('estudiante_id')->references('id')->on('estudiante');
 
 
             $table->timestamps();

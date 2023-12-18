@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alerta de Respuestas Negativas</title>
-    <!-- Estilos personalizados si es necesario -->
 </head>
 <body>
     <div class="container">

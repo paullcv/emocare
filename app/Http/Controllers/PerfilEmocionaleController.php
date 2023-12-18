@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PerfilEmocionale;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -19,8 +20,17 @@ class PerfilEmocionaleController extends Controller
 
     public function ver(User $estudiante)
     {
-        $respuestas = $estudiante->respuestas; // Asumiendo que tienes una relación llamada 'respuestas' en tu modelo User
-
-        return view('perfilemocional.ver', compact('estudiante', 'respuestas'));
+        // Obtener el perfil emocional del estudiante autenticado
+        $perfilEmocional = PerfilEmocionale::where('estudiante_id', $estudiante->userable->id)->first();
+    
+        // Obtener la sumatoria de respuestas para cada categoría
+        $totalPositivo = PerfilEmocionale::where('estudiante_id', $estudiante->userable->id)->sum('resume_positivo');
+        $totalNegativo = PerfilEmocionale::where('estudiante_id', $estudiante->userable->id)->sum('resume_negativo');
+        $totalNeutral = PerfilEmocionale::where('estudiante_id', $estudiante->userable->id)->sum('resume_neutral');
+    
+        $respuestas = $estudiante->respuestas;
+    
+        return view('perfilemocional.ver', compact('estudiante', 'respuestas', 'totalPositivo', 'totalNegativo', 'totalNeutral'));
     }
+    
 }

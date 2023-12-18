@@ -30,6 +30,10 @@ class Estudiante extends Model
         return $this->hasMany(SesionApoyo::class);
     }
 
+    public function perfilemocional(){
+        return $this->belongsTo(PerfilEmocionale::class);
+    }
+
    
 
 }

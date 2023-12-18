@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\alertas;
 use App\Models\Cuestionario;
+use App\Models\PerfilEmocionale;
 use App\Models\Respuesta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -35,57 +36,77 @@ class RespuestaController extends Controller
         foreach ($cuestionario->preguntas as $pregunta) {
             $rules["respuestas.{$pregunta->id}"] = 'required|string|max:255';
         }
-
+    
         $messages = [];
         foreach ($cuestionario->preguntas as $pregunta) {
             $messages["respuestas.{$pregunta->id}.required"] = "La respuesta a la pregunta '{$pregunta->pregunta}' es obligatoria.";
             $messages["respuestas.{$pregunta->id}.max"] = "La respuesta a la pregunta '{$pregunta->pregunta}' no puede tener más de :max caracteres.";
         }
-
+    
         $this->validate($request, $rules, $messages);
-
+    
+        // Obtener el perfil emocional del estudiante
+        $estudiante = auth()->user();
+        $perfilEmocional = $estudiante->perfilemocional;
+    
+        // Si el estudiante no tiene un perfil emocional, créalo
+        if (!$perfilEmocional) {
+            $perfilEmocional = new PerfilEmocionale();
+            $perfilEmocional->estudiante_id = $estudiante->id;
+            $perfilEmocional->save();
+        }
+    
         // Guardar las respuestas con análisis de sentimientos
         $respuestasNegativas = 0;
-
-        // Guardar las respuestas con análisis de sentimientos
+    
         foreach ($cuestionario->preguntas as $pregunta) {
             $respuesta = new Respuesta([
                 'respuesta' => $request->input("respuestas.{$pregunta->id}"),
                 'pregunta_id' => $pregunta->id,
-                'estudiante_id' => auth()->user()->id, // o donde obtengas el ID del estudiante
+                'estudiante_id' => $estudiante->id, // Obtener directamente el ID del estudiante
             ]);
-
+    
             // Analizar sentimientos y asignar el resultado al atributo 'sentimiento'
             $sentimiento = $this->analizarSentimientos($respuesta->respuesta);
             $respuesta->sentimiento = $sentimiento;
-
-            // Contar respuestas negativas
-            if ($sentimiento === 'negativo') {
-                $respuestasNegativas++;
+    
+            // Actualizar contadores en el perfil emocional
+            if ($sentimiento === 'positivo') {
+                $perfilEmocional->resume_positivo = $perfilEmocional->resume_positivo + 1;
+            } elseif ($sentimiento === 'negativo') {
+                $perfilEmocional->resume_negativo = $perfilEmocional->resume_negativo + 1;
+                $respuestasNegativas++; // Incrementar el contador
+            } elseif ($sentimiento === 'neutral') {
+                $perfilEmocional->resume_neutral = $perfilEmocional->resume_neutral + 1;
             }
-
+    
             $respuesta->save();
         }
-
+    
+        // Guardar los cambios en el perfil emocional
+        $perfilEmocional->save();
+    
         // Calcular el porcentaje de respuestas negativas
-        $porcentajeNegativas = ($respuestasNegativas / count($cuestionario->preguntas)) * 100;
-
+        $totalPreguntas = count($cuestionario->preguntas);
+        $porcentajeNegativas = ($respuestasNegativas / $totalPreguntas) * 100;
+    
         // Enviar alerta si el porcentaje de respuestas negativas es mayor o igual al 60%
         if ($porcentajeNegativas >= 60) {
             $this->enviarAlertaRespuestasNegativas(
-                auth()->user()->name,  // Nombre del estudiante
+                $estudiante->name,  // Nombre del estudiante
                 $cuestionario->titulo, // Título del cuestionario
                 $porcentajeNegativas   // Porcentaje de respuestas negativas
             );
         }
-
-
+    
         // Puedes agregar un mensaje de éxito si lo deseas
         $notificacion = 'Respuestas enviadas correctamente.';
-
+    
         // Redireccionar a la página que prefieras
         return redirect()->route('responder.index')->with(compact('notificacion'));
     }
+    
+    
 
 
     // Función para analizar sentimientos
@@ -134,12 +155,11 @@ class RespuestaController extends Controller
     {
         // Aquí puedes enviar una alerta por correo electrónico
         $mensaje = "El estudiante $nombreEstudiante ha alcanzado un porcentaje de respuestas negativas del $porcentajeNegativas% en el cuestionario '$tituloCuestionario'. Revisar las respuestas.";
-    
+
         // Pasar los argumentos correctos al constructor de la clase Alertas
         $mail = new Alertas($nombreEstudiante, $tituloCuestionario, $porcentajeNegativas);
-    
+
         // Utilizar la variable $mail en lugar de la clase directamente
         Mail::to('paul.cruz.4.pc@gmail.com')->send($mail);
     }
-    
 }
