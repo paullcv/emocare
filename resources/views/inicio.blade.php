@@ -6,6 +6,7 @@
         </h2>
     </div>
     @livewire('respuestas-chart')
+    @livewire('sesionesapoyo-chart')
 
 @endsection
 
