@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\alertas;
 use App\Models\Cuestionario;
 use App\Models\Respuesta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class RespuestaController extends Controller
 {
@@ -43,6 +45,9 @@ class RespuestaController extends Controller
         $this->validate($request, $rules, $messages);
 
         // Guardar las respuestas con análisis de sentimientos
+        $respuestasNegativas = 0;
+
+        // Guardar las respuestas con análisis de sentimientos
         foreach ($cuestionario->preguntas as $pregunta) {
             $respuesta = new Respuesta([
                 'respuesta' => $request->input("respuestas.{$pregunta->id}"),
@@ -54,8 +59,26 @@ class RespuestaController extends Controller
             $sentimiento = $this->analizarSentimientos($respuesta->respuesta);
             $respuesta->sentimiento = $sentimiento;
 
+            // Contar respuestas negativas
+            if ($sentimiento === 'negativo') {
+                $respuestasNegativas++;
+            }
+
             $respuesta->save();
         }
+
+        // Calcular el porcentaje de respuestas negativas
+        $porcentajeNegativas = ($respuestasNegativas / count($cuestionario->preguntas)) * 100;
+
+        // Enviar alerta si el porcentaje de respuestas negativas es mayor o igual al 60%
+        if ($porcentajeNegativas >= 60) {
+            $this->enviarAlertaRespuestasNegativas(
+                auth()->user()->name,  // Nombre del estudiante
+                $cuestionario->titulo, // Título del cuestionario
+                $porcentajeNegativas   // Porcentaje de respuestas negativas
+            );
+        }
+
 
         // Puedes agregar un mensaje de éxito si lo deseas
         $notificacion = 'Respuestas enviadas correctamente.';
@@ -64,7 +87,7 @@ class RespuestaController extends Controller
         return redirect()->route('responder.index')->with(compact('notificacion'));
     }
 
-    
+
     // Función para analizar sentimientos
     private function analizarSentimientos($texto)
     {
@@ -84,8 +107,8 @@ class RespuestaController extends Controller
         $scriptPath = base_path('IASentimientos/analisisSM.py');
         $venvPath = base_path('IASentimientos/venv');
 
-            $command = "\"$venvPath/Scripts/activate\" && \"$venvPath/Scripts/python\" \"$scriptPath\" \"$rutamodelo\" \"$texto\"";
-            $output = shell_exec($command);
+        $command = "\"$venvPath/Scripts/activate\" && \"$venvPath/Scripts/python\" \"$scriptPath\" \"$rutamodelo\" \"$texto\"";
+        $output = shell_exec($command);
 
         // Transformar el resultado según tus necesidades
         return $this->transformarSentimiento($output);
@@ -106,4 +129,17 @@ class RespuestaController extends Controller
             return 'neutral';
         }
     }
+
+    private function enviarAlertaRespuestasNegativas($nombreEstudiante, $tituloCuestionario, $porcentajeNegativas)
+    {
+        // Aquí puedes enviar una alerta por correo electrónico
+        $mensaje = "El estudiante $nombreEstudiante ha alcanzado un porcentaje de respuestas negativas del $porcentajeNegativas% en el cuestionario '$tituloCuestionario'. Revisar las respuestas.";
+    
+        // Pasar los argumentos correctos al constructor de la clase Alertas
+        $mail = new Alertas($nombreEstudiante, $tituloCuestionario, $porcentajeNegativas);
+    
+        // Utilizar la variable $mail en lugar de la clase directamente
+        Mail::to('paul.cruz.4.pc@gmail.com')->send($mail);
+    }
+    
 }

@@ -40,6 +40,10 @@ class EstudianteSeeder extends Seeder
                 );
             }
         }
+
+          // Crear estudiantes específicos
+          $this->createEstudiante('paulcv@gmail.com', 'Paul Cruz', 'masculino', 'Sin ninguna observacion', Curso::find(12), 17);
+          $this->createEstudiante('karlameneses@gmail.com', 'Karla Meneses', 'femenino', 'Sin ninguna observacion', Curso::find(11), 16);
     }
 
     private function createEstudiante($email, $name, $sexo, $observacion, $curso)
